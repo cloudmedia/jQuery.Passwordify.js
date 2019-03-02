@@ -10,11 +10,15 @@ if (window.jQuery) {
             var settings = $.extend({
                 maxLength: 8,
                 numbersOnly: false,
+                alphaOnly: false,
+                alNumOnly: false,
                 enterKeyCallback: null
             }, opts);
 
             var rePattern = '\\s\\S';
             if (settings.numbersOnly) rePattern = '0-9';
+            if (settings.alphaOnly) rePattern = 'A-z';
+            if (settings.alNumOnly) rePattern = '0-9A-z';
 
             var maskPlaceholder = "";
             for (var i = 0; i < settings.maxLength; i++)
