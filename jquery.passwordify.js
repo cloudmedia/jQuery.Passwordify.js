@@ -28,6 +28,7 @@ if (window.jQuery) {
 
             return this.on('keyup', function (e) {
                 var me = $(this);
+                console.log(e.which);
                 switch (e.which) {
                     case 8: // Handle backspace
                         $(this).data('val', $(this).data('val').slice(0, -1));
@@ -35,6 +36,9 @@ if (window.jQuery) {
                     case 13: // Handle enter key
                         if (typeof settings.enterKeyCallback == 'function') settings.enterKeyCallback(me);
                         break;
+                    case undefined:
+                        $(this).data('val', $(this).val());
+                    break;
                     default: // All other input
                         var regex = new RegExp("^[" + rePattern + "]$");
                         if (regex.exec(e.key) && $(this).data('val').length < settings.maxLength) {
@@ -44,6 +48,7 @@ if (window.jQuery) {
                 setTimeout(function () {
                     var inpVal = me.val();
                     me.val(inpVal.replace(/./gi, '*'));
+                    me.trigger('change');
                 }, 300);
             }).mask(maskPlaceholder, {
                 translation: {
