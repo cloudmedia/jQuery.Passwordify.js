@@ -28,7 +28,6 @@ if (window.jQuery) {
 
             return this.on('keyup', function (e) {
                 var me = $(this);
-                console.log(e.which);
                 switch (e.which) {
                     case 8: // Handle backspace
                         $(this).data('val', $(this).data('val').slice(0, -1));
