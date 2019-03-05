@@ -27,6 +27,8 @@ if (window.jQuery) {
             }
 
             return this.on('keyup', function (e) {
+                var inpVal = $(this).val();
+                var entered = inpVal[inpVal.length-1];
                 var me = $(this);
                 switch (e.which) {
                     case 8: // Handle backspace
@@ -40,8 +42,8 @@ if (window.jQuery) {
                     break;
                     default: // All other input
                         var regex = new RegExp("^[" + rePattern + "]$");
-                        if (regex.exec(e.key) && $(this).data('val').length < settings.maxLength) {
-                            $(this).data('val', $(this).data('val') + e.key);
+                        if (regex.exec(entered) && $(this).data('val').length < settings.maxLength) {
+                            $(this).data('val', $(this).data('val') + entered);
                         }
                 }
                 setTimeout(function () {
